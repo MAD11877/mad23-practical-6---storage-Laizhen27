@@ -76,8 +76,16 @@ public class MyDbHandler extends SQLiteOpenHelper {
                 String description = cursor.getString(descriptionIndex);
                 int userID = cursor.getInt(userIDIndex);
                 String followed = cursor.getString(followedIndex);
+                boolean follow;
+                if(Integer.valueOf(followed) == 0){
+                    follow = false;
+                }
+                else{
+                    follow = true;
+                }
+                Log.v("follow", Boolean.toString(follow));
 
-                User user = new User(username, description, userID, Boolean.parseBoolean(followed));
+                User user = new User(username, description, userID, follow);
                 userList.add(user);
             } while (cursor.moveToNext());
         }
